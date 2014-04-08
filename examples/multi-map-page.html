@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Examples: Multiple Maps</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<script src="http://leafletjs.com/dist/leaflet.js"></script>
+		<link href="http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css" rel="stylesheet" />
+
+		<script src="../dist/Leaflet.fullscreen.js"></script>
+		<link href="../dist/leaflet.fullscreen.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<h3>Examples: Multiple Maps</h3>
+		<div style="min-width: 810px;">
+			<div style="display: inline-block; width: 410px;">
+				<div id="map1" style="width: 400px; height: 300px;"> </div>
+			</div>
+			<div style="display: inline-block; width: 400px;">
+				<div id="map2" style="width: 400px; height: 300px;"> </div>
+			</div>
+		</div>
+		<div style="min-width: 810px; margin-top: 10px;">
+			<div style="display: inline-block; width: 410px;">
+				<div id="map3" class="dark" style="width: 400px; height: 300px;"> </div>
+			</div>
+			<div style="display: inline-block; width: 400px;">
+				<div id="map4" class="dark" style="width: 400px; height: 300px;"> </div>
+			</div>
+		</div>
+		<script>
+var CM_ATTR = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+	'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+	'Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+
+var CM_URL = 'http://{s}.tile.cloudmade.com/d4fc77ea4a63471cab2423e66626cbb6/{styleId}/256/{z}/{x}/{y}.png';
+
+OSM_URL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+OSM_ATTRIB = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+var London = new L.LatLng(51.5072, 0.1275);
+var map1 = L.map('map1', {
+	center: London,
+	zoom: 5,
+    fullscreenControl: true
+});
+L.tileLayer(CM_URL, {attribution: CM_ATTR, styleId: 22677}).addTo(map1);
+
+var map2 = L.map('map2', {
+	center: London,
+	zoom: 5,
+    fullscreenControl: true
+});
+L.tileLayer(CM_URL, {attribution: CM_ATTR, styleId: 997}).addTo(map2);
+
+var map3 = L.map('map3', {
+	center: London,
+	zoom: 7,
+    fullscreenControl: true
+});
+L.tileLayer(CM_URL, {attribution: CM_ATTR, styleId: 997}).addTo(map3);
+
+var map4 = L.map('map4', {
+	center: London,
+	zoom: 7,
+    fullscreenControl: true
+});
+L.tileLayer(CM_URL, {attribution: CM_ATTR, styleId: 46561}).addTo(map4);
+		</script>
+	</body>
+</html>
