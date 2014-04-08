@@ -78,22 +78,6 @@ L.Map.include({
         } else {
             L.DomUtil.addClass(container, 'leaflet-fullscreen-on');
         }
-    },
-
-    _onFullscreenChange: function () {
-        var fullscreenElement =
-            document.fullscreenElement ||
-            document.mozFullScreenElement ||
-            document.webkitFullscreenElement;
-
-        this._toggleFullscreenClass();
-        if (fullscreenElement === this.getContainer()) {
-            this._isFullscreen = true;
-            this.fire('fullscreenchange');
-        } else if (this._isFullscreen) {
-            this._isFullscreen = false;
-            this.fire('fullscreenchange');
-        }
     }
 });
 
@@ -102,6 +86,23 @@ L.Map.mergeOptions({
 });
 
 L.Map.addInitHook(function () {
+    this._onFullscreenChange = function () {
+        var fullscreenElement =
+            document.fullscreenElement ||
+            document.mozFullScreenElement ||
+            document.webkitFullscreenElement;
+
+        if (fullscreenElement === this.getContainer()) {
+        	this._toggleFullscreenClass();
+            this._isFullscreen = true;
+            this.fire('fullscreenchange');
+        } else if (this._isFullscreen) {
+        	this._toggleFullscreenClass();
+            this._isFullscreen = false;
+            this.fire('fullscreenchange');
+        }
+    };
+
     if (this.options.fullscreenControl) {
         this.fullscreenControl = new L.Control.Fullscreen();
         this.addControl(this.fullscreenControl);
